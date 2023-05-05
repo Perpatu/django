@@ -1,0 +1,9 @@
+assets/
+clients/migrations/
+comments/migrations/
+departments/migrations/
+files/migrations/
+projects/migrations/
+queueFile/migrations/
+users/migrations/
+inquiries/migrations/

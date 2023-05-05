@@ -1,0 +1,32 @@
+version: "3.11"
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=crm
+      - POSTGRES_USER=crm
+      - POSTGRES_PASSWORD=crm123
+    ports:
+      - "5430:5432"
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  cache:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass Ex6dN8CzP94UWUsazz5W4MH4VFAX5U
+    volumes: 
+      - .:/code/
+    depends_on:
+      - db
